@@ -66,6 +66,24 @@ public class ManhuntCommand extends BaseCommand {
         }
     }
 
+    @Subcommand("start")
+    @CommandPermission("manhunt.command.start")
+    public void onStartSubcommand(Player player) {
+        if (!Manhunt.getInstance().getConfigManager().isEnabled()) {
+            player.sendMessage(Manhunt.getInstance().getPrefix() + "§cManhunt is disabled!");
+            return;
+        }
+        if (Manhunt.getInstance().getRunners().size() >= 1 && Manhunt.getInstance().getHunters().size() >= 1) {
+            Manhunt.getInstance().getHunters().forEach(s -> {
+                Player hunterPlayer = Bukkit.getPlayer(s);
+                if (hunterPlayer != null) {
+                    hunterPlayer.getInventory().addItem(Manhunt.getInstance().getCompassItemBuilder().build());
+                }
+            });
+        } else {
+            player.sendMessage(Manhunt.getInstance().getPrefix() + "You're missing either one runner or hunter!");
+        }
+    }
 
     @Subcommand("admin")
     @CommandAlias("manhuntadmin")
