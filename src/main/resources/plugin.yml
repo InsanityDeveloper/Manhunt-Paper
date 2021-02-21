@@ -1,0 +1,6 @@
+name: Manhunt
+version: ${project.version}
+main: de.insanitydev.manhunt.Manhunt
+api-version: 1.16
+authors: [ InsanityDev ]
+description: Manhunt Recreation
