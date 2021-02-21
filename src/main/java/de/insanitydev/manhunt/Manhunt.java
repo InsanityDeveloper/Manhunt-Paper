@@ -12,7 +12,6 @@ import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.event.HandlerList;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -24,20 +23,23 @@ public final class Manhunt extends JavaPlugin {
     @Getter
     private static Manhunt instance;
     @Getter
-    private final ItemStack compassItem = new ItemBuilder(Material.COMPASS)
-            .setName("§dTracker")
-            .build();
+    private final ItemBuilder compassItemBuilder = new ItemBuilder(Material.COMPASS)
+            .setName("§dTracker");
+
     @Getter
     private final List<String> hunters = new ArrayList<>();
     @Getter
     private final List<String> runners = new ArrayList<>();
+
     private final PlayerDeath playerDeathListener = new PlayerDeath();
     private final PlayerInteract playerInteractListener = new PlayerInteract();
     private final ManhuntCommand manhuntCommand = new ManhuntCommand();
+
     @Getter
     private PaperCommandManager paperCommandManager;
     @Getter
     private ConfigManager configManager;
+
     @Getter
     private String prefix;
 
@@ -63,6 +65,7 @@ public final class Manhunt extends JavaPlugin {
             PluginManager pluginManager = Bukkit.getPluginManager();
             pluginManager.registerEvents(playerDeathListener, this);
             pluginManager.registerEvents(playerInteractListener, this);
+            compassItemBuilder.setName(configManager.getCompassItemName());
         }
     }
 
@@ -73,6 +76,7 @@ public final class Manhunt extends JavaPlugin {
             PluginManager pluginManager = Bukkit.getPluginManager();
             pluginManager.registerEvents(playerDeathListener, this);
             pluginManager.registerEvents(playerInteractListener, this);
+            compassItemBuilder.setName(configManager.getCompassItemName());
         }
     }
 

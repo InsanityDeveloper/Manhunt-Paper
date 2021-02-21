@@ -16,14 +16,14 @@ public class PlayerDeath implements Listener {
             Manhunt.getInstance().getRunners().remove(event.getEntity().getUniqueId().toString());
         }
         if (Manhunt.getInstance().getHunters().contains(event.getEntity().getUniqueId().toString())) {
-            event.getDrops().removeIf(drop -> drop.isSimilar(Manhunt.getInstance().getCompassItem()));
+            event.getDrops().removeIf(drop -> drop.isSimilar(Manhunt.getInstance().getCompassItemBuilder().build()));
         }
     }
 
     @EventHandler
     public void onPlayerPostRespawn(PlayerPostRespawnEvent event) {
         if (Manhunt.getInstance().getHunters().contains(event.getPlayer().getUniqueId().toString())) {
-            event.getPlayer().getInventory().addItem(Manhunt.getInstance().getCompassItem());
+            event.getPlayer().getInventory().addItem(Manhunt.getInstance().getCompassItemBuilder().build());
         }
     }
 

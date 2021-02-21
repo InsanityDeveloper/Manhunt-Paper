@@ -99,6 +99,7 @@ public class ManhuntCommand extends BaseCommand {
                 Manhunt.getInstance().getConfigManager().setEnabled(!Manhunt.getInstance().getConfigManager().isEnabled());
                 player.sendMessage(Manhunt.getInstance().getPrefix() + "Manhunt is now " +
                         (Manhunt.getInstance().getConfigManager().isEnabled() ? "§aenabled" : "§cdisabled") + " §e!");
+                Manhunt.getInstance().reload();
             }
 
             @Subcommand("dropCompassOnDeath")
